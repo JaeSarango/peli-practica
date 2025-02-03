@@ -1,35 +1,26 @@
-import { useEffect } from "react";
-import useMovies from "../hooks/useMovies";
+import  useMovieStore  from "../store/movieStore";
 
 const ListMovies = () => {
-  const { movies, getMovies } = useMovies();
+  const { movies } = useMovieStore();
+  // console.log(movies);  
 
-  // useEffect(() => {
-  //   getMovies("Batman");
-  // }, []);
-
-  // if (!movies) return <p>Loading...</p>;
+  if (!movies) return <p>Loading...</p>;
 
   return (
-    <div className=" w-full grid  grid-cols-3  justify-between ">
-      {movies?.Search?.map((movie) => (
-        <div key={movie?.imdbID}>
-          <p>{movie?.Title.slice(0, 10)}</p>
-          <img className="rounded-2xl" src={movie?.Poster} />
-        </div>
-      ))}
+    <div className="w-full grid grid-cols-3 justify-between">
+      {movies?.length > 0 ? (
+        movies.map((movie) => (
+          <div key={movie?.imdbID}>
+
+            <p>{movie?.Title?.slice(0, 10)}{movie?.Title?.length > 10 ? "..." : ""}</p>
+            <img className="rounded-2xl" src={movie?.Poster} alt={movie?.Title} />
+          </div>
+        ))
+      ) : (
+        <p>No se encontraron películas.</p>
+      )}
     </div>
   );
 };
 
 export default ListMovies;
-
-// const nombre = (movie) => {
-//   console.log("hola")
-// }
-
-// (movie) => {
-//   console.log("hola")
-// }
-
-// movie=>(<p>hola<</p>)

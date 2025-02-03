@@ -6,7 +6,7 @@ export const getMoviesService = async (search) => {
     const res = await axios.get(
       api_base_url + "?apikey=" + api_key + "&s=" + search
     );
-    return res.data;
+    return res.data.Search;
   } catch (error) {
     console.log(error);
   }

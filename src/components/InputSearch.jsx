@@ -9,6 +9,7 @@ const InputSearch = () => {
     await getMovies(value.search);
   };
 
+
   return (
     <Row justify="center" className="p-4">
       <Form

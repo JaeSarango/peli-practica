@@ -1,19 +1,19 @@
-// import { useEffect } from "react";
-import { getMoviesService } from "../services/getMoviesService";
-import { useState } from "react";
+import useMovieStore from "../store/movieStore";
 
 const useMovies = () => {
-  const [movies, setMovies] = useState({});
-  //   useEffect(() => {
-  //     getMovies();
-  //   }, []);
-  const getMovies = async (peli) => {
-    const respuesta = await getMoviesService(peli);
-    // respuesta  = res.data
-    console.log(respuesta);
-    setMovies(respuesta); // console.log(movies);
-    return { movies, getMovies };
+  const { setMovies } = useMovieStore();
+
+  const getMovies = async (search) => {
+    try {
+      await setMovies(search); 
+    } catch (error) {
+      console.error("Error al obtener películas:", error);
+    }
+
   };
+
+  return { getMovies };
 };
+
 
 export default useMovies;
